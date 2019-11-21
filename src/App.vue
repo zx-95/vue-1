@@ -1,32 +1,49 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <el-container>
+      <el-header>
+        <topBar></topBar>
+      </el-header>
+      <el-main>
+        <div class="block">
+          <el-carousel trigger="click" height="150px">
+            <el-carousel-item v-for="item in 4" :key="item">
+              <h3 class="small">{{ item }}</h3>
+            </el-carousel-item>
+          </el-carousel>
+        </div>
+      </el-main>
+      <el-footer>Footer</el-footer>
+    </el-container>
   </div>
 </template>
-
-<style lang="less">
+<script>
+import TopBar from './components/TopBar.vue'
+export default {
+  data () {
+    return {
+      activeIndex: '1'
+    }
+  },
+  methods: {
+    handleSelect (tab, event) {
+      console.log(tab, event)
+    }
+  },
+  components: {
+    topBar: TopBar
+  }
+}
+</script>
+<style lang="less" scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  overflow-x: hidden;
+  height: 1000px;
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>
